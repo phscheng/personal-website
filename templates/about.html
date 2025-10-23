@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Phyllis Cheng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Me</a></li>
+                        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>About Me</h2>
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <img src="{{ url_for('static', filename='images/headshot_new.jpg') }}" alt="Phyllis Cheng - Profile Photo" />
+                    </div>
+                    <div class="profile-text">
+                        <h3>Hello, I'm Phyllis!</h3>
+                        <p>I'm a Master of Science in Information Systems student at Indiana University's Kelley School of Business, with a passion for data analysis, supply chain optimization, and leveraging technology to solve complex business challenges. My journey combines academic excellence with real-world experience at Fortune 500 companies.</p>
+                        
+                        <p>With expertise in problem-solving and analysis, I enjoy tackling complex challenges and turning ideas into reality. I believe in the power of continuous learning and staying up-to-date with the latest technologies and industry trends.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>My Background</h2>
+                <p>My professional journey began with a strong foundation in supply chain management and business analytics at Indiana University's Kelley School of Business. Through internships at Target Corporation and Merck & Co., I've gained hands-on experience in data analysis, process improvement, and strategic decision-making.</p>
+                
+                <p>At Target, I led process improvements for import inventory management, increasing purchase order accuracy and reducing out-of-stock rates by approximately 5%. At Merck, I audited 7,000+ procurement records to identify compliance risks and generated cost-saving insights across $15M+ in contracts.</p>
+            </section>
+
+            <section class="section">
+                <h2>My Interests</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-left: 4px solid #77604b;">
+                        <h3>Data Analysis</h3>
+                        <p>I'm passionate about transforming raw data into actionable insights using Python, SQL, and R. I enjoy uncovering patterns and trends that drive strategic business decisions.</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-left: 4px solid #77604b;">
+                        <h3>Operations Optimization</h3>
+                        <p>I find fulfillment in optimizing supply chain processes and inventory management systems to improve efficiency and reduce costs for organizations.</p>
+                    </div>
+                    <p></p>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-left: 4px solid #77604b;">
+                        <h3>Leadership & Team Collaboration</h3>
+                        <p>I thrive in leadership roles, having served as Director of Communications for MSIS Cybersecurity Association and led teams of 5+ interns in consulting projects.</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-left: 4px solid #77604b;">
+                        <h3>Music & Cultural Arts</h3>
+                        <p>Beyond business, I'm passionate about cello performance and Taiwanese culture, balancing analytical work with creative expression and cultural appreciation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>My Goals</h2>
+                <p>Looking ahead, I'm excited about the opportunities to grow and contribute to meaningful projects. My goals include:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Completing my MSIS degree and pursuing a career in technology consulting</li>
+                    <li>Leading innovative projects that optimize business processes and drive operational excellence</li>
+                    <li>Contributing to the MSIS Cybersecurity Association and building strong professional networks</li>
+                    <li>Applying my analytical skills to solve complex business challenges in Fortune 500 companies</li>
+                    <li>Continuing to balance professional growth with my passion for music and cultural arts</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Personal Philosophy</h2>
+                <p>I believe that data-driven decisions and strategic analysis should serve business objectives and create value for stakeholders. Every analysis, every process improvement, and every project should be guided by the principle of creating measurable impact and operational excellence.</p>
+                
+                <p>I'm committed to ethical business practices, continuous learning, and creating inclusive environments that foster collaboration and innovation. My approach combines analytical rigor with creative problem-solving to address complex challenges.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Phyllis Cheng. All rights reserved. | Built with passion and dedication.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

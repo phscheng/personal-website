@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phyllis Cheng - Personal Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Me</a></li>
+                        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h2>Phyllis Cheng</h2>
+                <p>Information Systems Professional | Passionate about leveraging technology to drive business solutions and create meaningful impact</p>
+            </section>
+
+            <section class="section">
+                <h2>About Me</h2>
+                <p>Hello! I'm Phyllis Cheng, a Master of Science in Information Systems student at Indiana University's Kelley School of Business. With a strong foundation in supply chain management, business analytics, and data analysis, I strive to create meaningful solutions that drive business success and operational excellence.</p>
+                
+                <p>My journey combines academic excellence with real-world experience at Fortune 500 companies like Target and Merck, where I've led process improvements, analyzed complex data sets, and delivered strategic recommendations that impact millions in revenue.</p>
+                
+                    <div style="margin-top: 2rem;">
+                    <a href="{{ url_for('about') }}" class="submit-btn">Learn More About Me</a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>What I Do</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="background: #f8f9fa; padding: 1.5rem; text-align: center; border-top: 3px solid #77604b;">
+                        <h3>Data Analysis</h3>
+                        <p>Analyzing complex datasets using Python, SQL, and R to identify trends, patterns, and opportunities that drive strategic business decisions.</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1.5rem; text-align: center; border-top: 3px solid #77604b;">
+                        <h3>Operations Optimization</h3>
+                        <p>Leading process improvements and inventory management initiatives that reduce costs and improve operational efficiency.</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1.5rem; text-align: center; border-top: 3px solid #77604b;">
+                        <h3>Business Intelligence</h3>
+                        <p>Collaborating with cross-functional teams to develop innovative solutions that address complex business challenges.</p>
+                    </div>
+                    <br>
+                        <div style="margin-top: 2rem;">
+                    <a href="{{ url_for('resume') }}" class="submit-btn">View Resume</a>
+                </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Featured Projects</h2>
+                <p>Explore my professional experiences and academic projects that demonstrate my expertise in data analysis, supply chain management, business intelligence, and creativity.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="{{ url_for('projects') }}" class="submit-btn">View All Projects</a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Let's Connect</h2>
+                <p>I'm always interested in new opportunities, collaborations, and meaningful conversations. I'd love to hear from you!</p>
+                <div style="margin-top: 2rem;">
+                    <a href="{{ url_for('contact') }}" class="submit-btn">Contact Information</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Phyllis Cheng. All rights reserved. | Built with passion and dedication.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

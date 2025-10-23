@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Phyllis Cheng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Me</a></li>
+                        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message flash-success">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <section class="section">
+                <h2>My Projects</h2>
+                <p>Here are some of the key projects and experiences that demonstrate my expertise in data analysis, supply chain optimization, business intelligence, and creativity. Each project represents real-world challenges and measurable business impact. Take a look below!</p>
+            </section>
+
+            <section class="section">
+                <h2>Featured Projects</h2>
+                {% if projects %}
+                <div class="projects-table-container">
+                    <table class="projects-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in projects %}
+                            <tr>
+                                <td class="project-image-cell">
+                                    <img src="{{ url_for('static', filename='images/' + project[3]) }}" 
+                                         alt="{{ project[1] }}" 
+                                         class="project-table-image"/>
+                                </td>
+                                <td class="project-title-cell">
+                                    <h3>{{ project[1] }}</h3>
+                                </td>
+                                <td class="project-description-cell">
+                                    <p>{{ project[2] }}</p>
+                                </td>
+                                <td class="project-date-cell">
+                                    <small>{{ project[4] }}</small>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p>No projects found. Use the form below to add your first project!</p>
+                {% endif %}
+            </section>
+
+            <section class="section">
+                <h2>Add a New Project</h2>
+                <p>Use this form to add a new project to my portfolio. Make sure to upload your image to the static/images folder first, then enter the filename below.</p>
+                <form class="project-form" id="projectForm" action="{{ url_for('projects') }}" method="POST">
+                    <div class="form-group">
+                        <label for="project_title">Project Title *</label>
+                        <input type="text" id="project_title" name="project_title" required minlength="1">
+                        <div class="error-message" id="projectTitleError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project_description">Project Description *</label>
+                        <textarea id="project_description" name="project_description" rows="6" required minlength="10" placeholder="Describe your project in detail..."></textarea>
+                        <div class="error-message" id="projectDescriptionError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project_image">Image Filename *</label>
+                        <input type="text" id="project_image" name="project_image" required placeholder="e.g., my_project.jpg">
+                        <small>Enter the filename of the image you uploaded to static/images/ folder</small>
+                        <div class="error-message" id="projectImageError"></div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Add Project</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Phyllis Cheng. All rights reserved. | Built with passion and dedication.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Project form validation and submission handling
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearProjectErrors();
+            
+            // Get form data
+            const title = document.getElementById('project_title').value.trim();
+            const description = document.getElementById('project_description').value.trim();
+            const imageFilename = document.getElementById('project_image').value.trim();
+            
+            let isValid = true;
+            
+            // Validate Project Title
+            if (!title) {
+                showProjectError('projectTitleError', 'Project title is required.');
+                isValid = false;
+            } else if (title.length < 1) {
+                showProjectError('projectTitleError', 'Project title must be at least 1 character.');
+                isValid = false;
+            }
+            
+            // Validate Project Description
+            if (!description) {
+                showProjectError('projectDescriptionError', 'Project description is required.');
+                isValid = false;
+            } else if (description.length < 10) {
+                showProjectError('projectDescriptionError', 'Project description must be at least 10 characters.');
+                isValid = false;
+            }
+            
+            // Validate Image Filename
+            if (!imageFilename) {
+                showProjectError('projectImageError', 'Image filename is required.');
+                isValid = false;
+            } else if (!imageFilename.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)) {
+                showProjectError('projectImageError', 'Please enter a valid image filename (e.g., my_project.jpg).');
+                isValid = false;
+            }
+            
+            // If form is valid, submit it
+            if (isValid) {
+                this.submit();
+            }
+        });
+
+        function showProjectError(errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+            
+            // Add error class to input
+            const inputId = errorId.replace('Error', '');
+            const inputElement = document.getElementById(inputId);
+            inputElement.classList.add('error');
+            inputElement.classList.remove('success');
+        }
+        
+        function clearProjectErrors() {
+            const projectErrorElements = document.querySelectorAll('#projectTitleError, #projectDescriptionError, #projectImageError');
+            projectErrorElements.forEach(element => {
+                element.classList.remove('show');
+                element.textContent = '';
+            });
+            
+            const projectInputElements = document.querySelectorAll('#project_title, #project_description, #project_image');
+            projectInputElements.forEach(element => {
+                element.classList.remove('error', 'success');
+            });
+        }
+    </script>
+</body>
+</html>

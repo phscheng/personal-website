@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Phyllis Cheng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Me</a></li>
+                        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>Professional Summary</h2>
+                <p>Master of Science in Information Systems student with strong analytical skills and real-world experience in data analysis, supply chain optimization, and business intelligence. Proven track record of delivering measurable results at Fortune 500 companies including Target Corporation and Merck & Co.</p>
+            </section>
+
+            <section class="section">
+                <h2>Education</h2>
+                <div class="resume-section">
+                    <div class="resume-item">
+                        <h4>Master of Science in Information Systems</h4>
+                        <div class="date">Indiana University, Kelley School of Business | Expected May 2026</div>
+                        <p>GPA: 3.70 / 4.00</p>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <h4>Bachelor of Science in Business</h4>
+                        <div class="date">Indiana University, Kelley School of Business | May 2025</div>
+                        <p>Majors: Supply Chain Management, Business Analytics</p>
+                        <p>Minor: Music, Jacobs School of Music</p>
+                        <p>GPA: 3.51 / 4.00</p>
+                        <p>Study Abroad: University of Oxford, St. Anne's College, Summer 2022</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Professional Experience</h2>
+                <div class="resume-section">
+                    <div class="resume-item">
+                        <h4>Inventory Analyst Intern – Home Care Department</h4>
+                        <div class="date">Target Corporation | June 2024 – August 2024</div>
+                        <ul>
+                            <li>Led process improvements for import inventory using a newly implemented system, increasing purchase order accuracy and reducing out-of-stock rates by approximately 5% while supporting sustained sales growth</li>
+                            <li>Analyzed $128.2M in import sales to identify fulfillment trends and performance gaps, delivering strategic recommendations to leadership and purchasing teams across key product categories</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <h4>IT Services Procurement Intern</h4>
+                        <div class="date">Merck & Co. | June 2023 – August 2023</div>
+                        <ul>
+                            <li>Audited 7,000+ procurement records in SAP to identify 200+ compliance risks in IT service contracts, building a streamlined Excel dashboard to guide long-term risk strategy and vendor management</li>
+                            <li>Evaluated IT spend patterns and renewal viability across $15M+ in contracts, generating cost-saving insights across software and hardware portfolios; delivered weekly data-driven recommendations to senior stakeholders</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <h4>Technology Consulting Intern and Team Lead</h4>
+                        <div class="date">Kelley HOPE Digital Project | May 2022 – August 2022</div>
+                        <ul>
+                            <li>Spearheaded a team of 5+ interns in supporting local small businesses during COVID-19 recovery by coordinating weekly client meetings, assigning tasks, and ensuring timely project updates and deliverables</li>
+                            <li>Enhanced online presence for small business clients by identifying technical pain points and implementing tailored solutions such as social media strategies and website redesigns, resulting in a 6% increase in foot traffic</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Leadership Experience</h2>
+                <div class="resume-section">
+                    <div class="resume-item">
+                        <h4>Director of Communications</h4>
+                        <div class="date">MSIS Cybersecurity Association | February 2025 – Present</div>
+                        <ul>
+                            <li>Interface with alumni network of 100+ to coordinate logistics for speaker sessions, panels, and networking events</li>
+                            <li>Create and maintain a cross-platform communication strategy to share updates between 50+ members, the executive board, and external partners; contribute to weekly planning meetings</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <h4>Recruitment Advisory Board</h4>
+                        <div class="date">Pi Sigma Epsilon | November 2022 – May 2025</div>
+                        <ul>
+                            <li>Revamped recruitment strategy by analyzing historical processes and data, redesigning event logistics, and implementing 20+ professional and social events to assess potential new members</li>
+                            <li>Partnered with board members to apply targeted marketing tactics such as social media campaigns, email outreach, and virtual information sessions, leading to 200+ applications for Spring 2025 recruitment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <h4>Congressional Representative: Kelley School Undergraduate District</h4>
+                        <div class="date">Indiana University Student Government | September 2022 – May 2023</div>
+                        <ul>
+                            <li>Drafted 5+ legislative policies addressing student body concerns and collaborated with representatives to implement IU and student government initiatives that improved campus life</li>
+                            <li>Oversaw a six-figure annual budget, ensuring responsible and strategic allocation of IU public funds in alignment with student-focused programs by analyzing past and current legislative goals</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Data Analysis & Programming</h4>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Productivity & Office Tools</h4>
+                        <span class="skill-tag">Microsoft Excel</span>
+                        <span class="skill-tag">Microsoft Access</span>
+                        <span class="skill-tag">Microsoft PowerPoint</span>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Enterprise Systems</h4>
+                        <span class="skill-tag">SAP</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Achievements</h2>
+                <div class="resume-section">
+                    <div class="resume-item">
+                        <h4>Deloitte Data Challenge Finalist</h4>
+                        <div class="date">Spring 2023</div>
+                        <p>Selected as finalist in competitive data analysis case competition, demonstrating analytical skills and strategic thinking.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Languages</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="background: #f8f9fa; padding: 1rem; text-align: center;">
+                        <strong>English</strong><br>
+                        <span style="color: #7f8c8d;">Native</span>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 1rem; text-align: center;">
+                        <strong>Mandarin Chinese</strong><br>
+                        <span style="color: #7f8c8d;">Conversational</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Phyllis Cheng. All rights reserved. | Built with passion and dedication.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

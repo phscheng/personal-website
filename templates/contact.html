@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Phyllis Cheng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Me</a></li>
+                        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message flash-success">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <section class="section">
+                <h2>Get In Touch</h2>
+                <p>I'm always excited to connect with fellow professionals, potential employers, and anyone interested in data analysis, supply chain management, or business intelligence. Whether you have opportunities in mind, want to discuss projects, or just want to chat about the latest in business analytics, I'd love to hear from you!</p>
+            </section>
+
+            <section class="section">
+                <h2>Contact Information</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>📧 Email</h3>
+                        <p>phcheng@iu.edu</p>
+                        <a href="mailto:phcheng@iu.edu">Send me an email</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h3>💼 LinkedIn</h3>
+                        <p>Connect with me professionally</p>
+                        <a href="https://www.linkedin.com/in/phyllischeng1" target="_blank">View my LinkedIn</a>
+                    </div>
+
+                    <div class="contact-item">
+                        <h3>⚡ GitHub</h3>
+                        <p>See my GitHub projects</p>
+                        <p><a href="https://github.com/phscheng" target="_blank">View my GitHub profile</a></p>
+                        <p>or</p>
+                        <p><a href="https://github.com/phscheng/AiDD-assignment5-new" target="_blank">View Assignment 5 repo</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Send Me a Message</h2>
+                <form class="contact-form" id="contactForm" action="{{ url_for('contact') }}" method="POST">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required minlength="1">
+                        <div class="error-message" id="firstNameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required minlength="1">
+                        <div class="error-message" id="lastNameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required minlength="8">
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                        <div class="error-message" id="confirmPasswordError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your project, question, or just say hello!"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Phyllis Cheng. All rights reserved. | Built with passion and dedication.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Simple form validation and submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearErrors();
+            
+            // Get form data
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            let isValid = true;
+            
+            // Validate First Name
+            if (!firstName) {
+                showError('firstNameError', 'First name is required.');
+                isValid = false;
+            } else if (firstName.length < 1) {
+                showError('firstNameError', 'First name must be at least 1 character.');
+                isValid = false;
+            }
+            
+            // Validate Last Name
+            if (!lastName) {
+                showError('lastNameError', 'Last name is required.');
+                isValid = false;
+            } else if (lastName.length < 1) {
+                showError('lastNameError', 'Last name must be at least 1 character.');
+                isValid = false;
+            }
+            
+            // Validate Email
+            const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+            if (!email) {
+                showError('emailError', 'Email address is required.');
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                showError('emailError', 'Please enter a valid email address.');
+                isValid = false;
+            }
+            
+            // Validate Password
+            if (!password) {
+                showError('passwordError', 'Password is required.');
+                isValid = false;
+            } else if (password.length < 8) {
+                showError('passwordError', 'Password must be at least 8 characters long.');
+                isValid = false;
+            }
+            
+            // Validate Confirm Password
+            if (!confirmPassword) {
+                showError('confirmPasswordError', 'Please confirm your password.');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError('confirmPasswordError', 'Passwords do not match.');
+                isValid = false;
+            }
+            
+            // If form is valid, redirect to thank you page
+            if (isValid) {
+                // In a real application, you would submit the form data to a server
+                // For now, we'll redirect to the thank you page
+                window.location.href = 'thankyou.html';
+            }
+        });
+        
+        function showError(errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+            
+            // Add error class to input
+            const inputId = errorId.replace('Error', '');
+            const inputElement = document.getElementById(inputId);
+            inputElement.classList.add('error');
+            inputElement.classList.remove('success');
+        }
+        
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.classList.remove('show');
+                element.textContent = '';
+            });
+            
+            const inputElements = document.querySelectorAll('.form-group input, .form-group textarea');
+            inputElements.forEach(element => {
+                element.classList.remove('error', 'success');
+            });
+        }
+        
+        
+        // Real-time validation
+        document.getElementById('firstName').addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && value.length >= 1) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('firstNameError').classList.remove('show');
+            }
+        });
+        
+        document.getElementById('lastName').addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && value.length >= 1) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('lastNameError').classList.remove('show');
+            }
+        });
+        
+        document.getElementById('email').addEventListener('blur', function() {
+            const value = this.value.trim();
+            const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+            if (value && emailRegex.test(value)) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('emailError').classList.remove('show');
+            }
+        });
+        
+        document.getElementById('password').addEventListener('blur', function() {
+            const value = this.value;
+            if (value && value.length >= 8) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('passwordError').classList.remove('show');
+            }
+        });
+        
+        document.getElementById('confirmPassword').addEventListener('blur', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            if (confirmPassword && password === confirmPassword) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('confirmPasswordError').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
